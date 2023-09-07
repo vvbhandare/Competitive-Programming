@@ -1,0 +1,27 @@
+class Solution {
+    fun equalPairs(grid: Array<IntArray>): Int {
+        var cnt = 0
+        val n = grid.size
+
+        if (n == 1) return 1
+
+        val hm = HashMap<List<Int>, Int>()
+        
+        // iterate through all rows
+        for (row in grid) {
+            val k = row.asList()
+            hm.put(k, hm.getOrDefault(k, 0) + 1)
+        }
+
+        // iterate through all columns
+        for (c in 0 until n) {
+            val t = mutableListOf<Int>()
+            for (r in 0 until n) {
+                t.add(grid[r][c])
+            }
+            cnt += hm.getOrDefault(t.toList(), 0)
+        }
+
+        return cnt
+    }
+}
