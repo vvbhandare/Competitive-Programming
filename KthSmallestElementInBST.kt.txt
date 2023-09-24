@@ -1,0 +1,30 @@
+/**
+ * Example:
+ * var ti = TreeNode(5)
+ * var v = ti.`val`
+ * Definition for a binary tree node.
+ * class TreeNode(var `val`: Int) {
+ *     var left: TreeNode? = null
+ *     var right: TreeNode? = null
+ * }
+ */
+class Solution {
+    var cnt = 0
+    var res = 0
+    fun kthSmallest(root: TreeNode?, k: Int): Int {
+        inorder(root, k)
+        return res
+    }
+
+    // L-M-R
+    private fun inorder(root: TreeNode?, k: Int) {
+        if (root == null) return
+        inorder(root.left, k)
+        cnt++
+        if (cnt == k) {
+            res = root.`val`
+            return
+        }
+        inorder(root.right, k)
+    }
+}
